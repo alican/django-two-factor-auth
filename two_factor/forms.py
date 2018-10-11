@@ -22,7 +22,7 @@ except ImportError:
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'placeholder': _('Enter your email', 'class': 'form-control')}))
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'placeholder': _('Enter your email'), 'class': 'form-control'}))
     password = forms.CharField(
         label=_("Password"),
         strip=False,
