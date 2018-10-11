@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_otp.forms import OTPAuthenticationFormMixin
 from django_otp.oath import totp
 from django_otp.plugins.otp_totp.models import TOTPDevice
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 from .models import (
     PhoneDevice, get_available_methods, get_available_phone_methods,
@@ -18,6 +19,17 @@ try:
     from otp_yubikey.models import RemoteYubikeyDevice, YubikeyDevice
 except ImportError:
     RemoteYubikeyDevice = YubikeyDevice = None
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'placeholder': _('Username')}))
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': _("Password")}
+        ),
+    )
 
 
 class MethodForm(forms.Form):
