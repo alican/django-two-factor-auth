@@ -9,7 +9,6 @@ import qrcode.image.svg
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.forms import Form
 from django.http import Http404, HttpResponse
@@ -61,7 +60,7 @@ class LoginView(IdempotentSessionWizardView):
     """
     template_name = 'two_factor/core/login.html'
     form_list = (
-        ('auth', AuthenticationForm),
+        ('auth', CustomAuthenticationForm),
         ('token', AuthenticationTokenForm),
         ('backup', BackupTokenForm),
     )
