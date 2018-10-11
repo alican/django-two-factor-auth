@@ -9,7 +9,6 @@ import qrcode.image.svg
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.forms import Form
 from django.http import Http404, HttpResponse
@@ -31,7 +30,7 @@ from two_factor.utils import totp_digits
 
 from ..forms import (
     AuthenticationTokenForm, BackupTokenForm, DeviceValidationForm, MethodForm,
-    PhoneNumberForm, PhoneNumberMethodForm, TOTPDeviceForm, YubiKeyDeviceForm,
+    PhoneNumberForm, PhoneNumberMethodForm, TOTPDeviceForm, YubiKeyDeviceForm, CustomAuthenticationForm
 )
 from ..models import PhoneDevice, get_available_phone_methods
 from ..utils import backup_phones, default_device, get_otpauth_url
@@ -61,7 +60,7 @@ class LoginView(IdempotentSessionWizardView):
     """
     template_name = 'two_factor/core/login.html'
     form_list = (
-        ('auth', AuthenticationForm),
+        ('auth', CustomAuthenticationForm),
         ('token', AuthenticationTokenForm),
         ('backup', BackupTokenForm),
     )
