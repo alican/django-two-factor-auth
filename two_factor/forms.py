@@ -154,7 +154,7 @@ class AuthenticationTokenForm(OTPAuthenticationFormMixin, Form):
     otp_token = forms.IntegerField(label=_("Token"), min_value=1,
                                    max_value=int('9' * totp_digits()))
 
-    otp_token.widget.attrs.update({'autofocus': 'autofocus'})
+    otp_token.widget.attrs.update({'autofocus': True, 'placeholder': _('Enter Token'), 'class': 'form-control'})
 
     # Our authentication form has an additional submit button to go to the
     # backup token form. When the `required` attribute is set on an input
