@@ -68,6 +68,8 @@ class PhoneNumberForm(ModelForm):
 
 class DeviceValidationForm(forms.Form):
     token = forms.IntegerField(label=_("Token"), min_value=1, max_value=int('9' * totp_digits()))
+    token.widget.attrs.update({'placeholder': _('Enter Token'), 'class': 'form-control'})
+
 
     error_messages = {
         'invalid_token': _('Entered token is not valid.'),
@@ -86,6 +88,8 @@ class DeviceValidationForm(forms.Form):
 
 class YubiKeyDeviceForm(DeviceValidationForm):
     token = forms.CharField(label=_("YubiKey"), widget=forms.PasswordInput())
+    token.widget.attrs.update({'placeholder': _('Enter YubiKey'), 'class': 'form-control'})
+
 
     error_messages = {
         'invalid_token': _("The YubiKey could not be verified."),
