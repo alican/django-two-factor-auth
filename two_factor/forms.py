@@ -193,3 +193,5 @@ class AuthenticationTokenForm(OTPAuthenticationFormMixin, Form):
 
 class BackupTokenForm(AuthenticationTokenForm):
     otp_token = forms.CharField(label=_("Token"))
+    otp_token.widget.attrs.update({'placeholder': _('Enter Token'), 'class': 'form-control'})
+
